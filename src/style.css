@@ -1,17 +1,9 @@
-/* =========================
-   FUENTE
-   ========================= */
-
 @font-face {
   font-family: "CalculatorFont";
-  src: url("./assets/fonts/matcha_world/Matcha_World.otf") format("woff2");
+  src: url("./assets/fonts/MiFuente.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
 }
-
-/* =========================
-   COLORES
-   ========================= */
 
 :root {
   --pink: #bd26bf;
@@ -22,10 +14,6 @@
   --white: #ffffff;
 }
 
-/* =========================
-   GENERAL
-   ========================= */
-
 * {
   box-sizing: border-box;
 }
@@ -34,14 +22,82 @@ body {
   margin: 0;
   min-height: 100vh;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   background-color: var(--dark-blue);
+  color: var(--white);
 
-  /* Fuente aplicada */
   font-family: "CalculatorFont", sans-serif;
+}
+
+main {
+  width: 100%;
+  min-height: 100vh;
+  padding: 40px 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+/* =========================
+   BOTÓN NUEVA CALCULADORA
+   ========================= */
+
+#add-calculator {
+  padding: 12px 24px;
+  margin-bottom: 35px;
+
+  border: 4px solid var(--dark-purple);
+  border-radius: 14px;
+
+  background-color: var(--pink);
+  color: var(--white);
+
+  font-family: "CalculatorFont", sans-serif;
+  font-size: 1rem;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 6px 0 var(--dark-purple),
+    0 8px 10px rgba(0, 0, 0, 0.2);
+
+  transition:
+    transform 0.1s ease,
+    box-shadow 0.1s ease,
+    filter 0.15s ease;
+}
+
+#add-calculator:hover {
+  filter: brightness(1.15);
+}
+
+#add-calculator:active {
+  transform: translateY(5px);
+
+  box-shadow:
+    0 1px 0 var(--dark-purple),
+    0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* =========================
+   CONTENEDOR
+   ========================= */
+
+#calculator-container {
+  width: 100%;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  justify-content: center;
+  align-items: flex-start;
+
+  gap: 40px;
 }
 
 /* =========================
@@ -66,7 +122,7 @@ body {
    PANTALLA
    ========================= */
 
-#screen {
+.screen {
   width: 100%;
   height: 85px;
 
@@ -100,11 +156,13 @@ body {
 
 .buttons {
   display: grid;
+
   grid-template-columns: repeat(4, 1fr);
+
   gap: 13px;
 }
 
-button {
+.calculator button {
   height: 58px;
 
   border: 4px solid var(--dark-purple);
@@ -113,7 +171,6 @@ button {
   background-color: var(--purple);
   color: var(--white);
 
-  /* Fuente aplicada también a los botones */
   font-family: "CalculatorFont", sans-serif;
   font-size: 1.25rem;
   font-weight: normal;
@@ -127,59 +184,47 @@ button {
   transition:
     transform 0.1s ease,
     box-shadow 0.1s ease,
-    background-color 0.15s ease;
+    filter 0.15s ease;
 }
 
-/* =========================
-   NÚMEROS
-   ========================= */
+/* Botones numéricos */
 
-button[data-number] {
+.calculator button[data-number] {
   background-color: var(--deep-purple);
 }
 
-/* =========================
-   OPERACIONES
-   ========================= */
+/* Operaciones */
 
-button[data-operation] {
+.calculator button[data-operation] {
   background-color: var(--purple);
 }
 
-/* =========================
-   C - DEL - %
-   ========================= */
+/* C, DEL y % */
 
-button[data-action="clear"],
-button[data-action="delete"],
-button[data-action="percent"] {
+.calculator button[data-action="clear"],
+.calculator button[data-action="delete"],
+.calculator button[data-action="percent"] {
   background-color: var(--dark-purple);
 }
 
-/* =========================
-   =
-   ========================= */
+/* Botón = */
 
-button[data-action="calculate"] {
+.calculator button[data-action="calculate"] {
   background-color: var(--pink);
 
-  /* El = ocupa dos columnas */
+  /* Ocupa las dos columnas restantes */
   grid-column: span 2;
 }
 
-/* =========================
-   HOVER
-   ========================= */
+/* Hover */
 
-button:hover {
+.calculator button:hover {
   filter: brightness(1.15);
 }
 
-/* =========================
-   BOTÓN PULSADO
-   ========================= */
+/* Efecto de pulsación */
 
-button:active {
+.calculator button:active {
   transform: translateY(5px);
 
   box-shadow:
@@ -192,17 +237,25 @@ button:active {
    ========================= */
 
 @media (max-width: 400px) {
+  main {
+    padding: 25px 10px;
+  }
+
+  #calculator-container {
+    gap: 30px;
+  }
+
   .calculator {
     width: 90%;
     padding: 20px;
   }
 
-  button {
+  .calculator button {
     height: 52px;
     font-size: 1.1rem;
   }
 
-  #screen {
+  .screen {
     height: 75px;
     font-size: 1.8rem;
   }
