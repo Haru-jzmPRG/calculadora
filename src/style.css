@@ -1,0 +1,209 @@
+/* =========================
+   FUENTE
+   ========================= */
+
+@font-face {
+  font-family: "CalculatorFont";
+  src: url("./assets/fonts/matcha_world/Matcha_World.otf") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* =========================
+   COLORES
+   ========================= */
+
+:root {
+  --pink: #bd26bf;
+  --dark-purple: #2f1540;
+  --purple: #6636bf;
+  --deep-purple: #2e1a73;
+  --dark-blue: #0d1026;
+  --white: #ffffff;
+}
+
+/* =========================
+   GENERAL
+   ========================= */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: var(--dark-blue);
+
+  /* Fuente aplicada */
+  font-family: "CalculatorFont", sans-serif;
+}
+
+/* =========================
+   CALCULADORA
+   ========================= */
+
+.calculator {
+  width: 330px;
+  padding: 25px;
+
+  background-color: var(--pink);
+
+  border: 6px solid var(--dark-purple);
+  border-radius: 35px;
+
+  box-shadow:
+    0 12px 0 var(--dark-purple),
+    0 18px 25px rgba(0, 0, 0, 0.35);
+}
+
+/* =========================
+   PANTALLA
+   ========================= */
+
+#screen {
+  width: 100%;
+  height: 85px;
+
+  padding: 15px 18px;
+  margin-bottom: 25px;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  background-color: var(--white);
+  color: var(--dark-blue);
+
+  border: 6px solid var(--dark-purple);
+  border-radius: 15px;
+
+  font-family: "CalculatorFont", sans-serif;
+  font-size: 2.2rem;
+  font-weight: normal;
+
+  overflow: hidden;
+
+  box-shadow:
+    inset 0 5px 8px rgba(0, 0, 0, 0.25),
+    0 4px 0 var(--deep-purple);
+}
+
+/* =========================
+   BOTONES
+   ========================= */
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 13px;
+}
+
+button {
+  height: 58px;
+
+  border: 4px solid var(--dark-purple);
+  border-radius: 14px;
+
+  background-color: var(--purple);
+  color: var(--white);
+
+  /* Fuente aplicada también a los botones */
+  font-family: "CalculatorFont", sans-serif;
+  font-size: 1.25rem;
+  font-weight: normal;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 6px 0 var(--dark-purple),
+    0 8px 10px rgba(0, 0, 0, 0.2);
+
+  transition:
+    transform 0.1s ease,
+    box-shadow 0.1s ease,
+    background-color 0.15s ease;
+}
+
+/* =========================
+   NÚMEROS
+   ========================= */
+
+button[data-number] {
+  background-color: var(--deep-purple);
+}
+
+/* =========================
+   OPERACIONES
+   ========================= */
+
+button[data-operation] {
+  background-color: var(--purple);
+}
+
+/* =========================
+   C - DEL - %
+   ========================= */
+
+button[data-action="clear"],
+button[data-action="delete"],
+button[data-action="percent"] {
+  background-color: var(--dark-purple);
+}
+
+/* =========================
+   =
+   ========================= */
+
+button[data-action="calculate"] {
+  background-color: var(--pink);
+
+  /* El = ocupa dos columnas */
+  grid-column: span 2;
+}
+
+/* =========================
+   HOVER
+   ========================= */
+
+button:hover {
+  filter: brightness(1.15);
+}
+
+/* =========================
+   BOTÓN PULSADO
+   ========================= */
+
+button:active {
+  transform: translateY(5px);
+
+  box-shadow:
+    0 1px 0 var(--dark-purple),
+    0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 400px) {
+  .calculator {
+    width: 90%;
+    padding: 20px;
+  }
+
+  button {
+    height: 52px;
+    font-size: 1.1rem;
+  }
+
+  #screen {
+    height: 75px;
+    font-size: 1.8rem;
+  }
+}
