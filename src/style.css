@@ -40,7 +40,7 @@ button:hover {
 main.workspace {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 300px;
-  align-items: start;
+  align-items: stretch;
   width: 100%;
   min-height: 100vh;
 }
@@ -169,14 +169,14 @@ main.workspace {
 
 /* Columna de reloj, cronómetro y temporizador */
 .tools-section {
+  min-height: 100%;
+  background-color: var(--pink);
+
   display: flex;
   flex-direction: column;
   gap: 28px;
-  min-width: 0;
-  min-height: 100vh;
+
   padding: 30px 18px;
-  background: var(--pink);
-  border-left: 5px solid var(--dark-purple);
 }
 
 /* .time-tool se usa para reloj y cronómetro; #timer para el temporizador. */
