@@ -3,58 +3,85 @@
 
 <head>
   <meta charset="UTF-8" />
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Calculadoras</title>
+  <title>Calculadoras y Relojes</title>
 </head>
 
 <body>
-  <main>
-    <h1>Calculadoras</h1>
+  <main class="workspace">
+    <section class="calculators-section">
+      <header class="calculators-header">
+        <h1>Calculadoras</h1>
+        <button id="add-calculator">Nueva calculadora</button>
+      </header>
 
-    <button id="add-calculator">
-      Nueva calculadora
-    </button>
+      <div id="calculator-container"></div>
 
-    <div id="calculator-container"></div>
+      <template id="calculator-template">
+        <div class="calculator">
 
-    <template id="calculator-template">
-      <div class="calculator">
+          <div class="screen">0</div>
 
-        <div class="screen">0</div>
+          <div class="buttons">
 
-        <div class="buttons">
+            <button data-action="clear">C</button>
+            <button data-action="delete">DEL</button>
+            <button data-action="percent">%</button>
+            <button data-operation="/">÷</button>
 
-          <button data-action="clear">C</button>
-          <button data-action="delete">DEL</button>
-          <button data-action="percent">%</button>
-          <button data-operation="/">÷</button>
+            <button data-number="7">7</button>
+            <button data-number="8">8</button>
+            <button data-number="9">9</button>
+            <button data-operation="*">×</button>
 
-          <button data-number="7">7</button>
-          <button data-number="8">8</button>
-          <button data-number="9">9</button>
-          <button data-operation="*">×</button>
+            <button data-number="4">4</button>
+            <button data-number="5">5</button>
+            <button data-number="6">6</button>
+            <button data-operation="-">−</button>
 
-          <button data-number="4">4</button>
-          <button data-number="5">5</button>
-          <button data-number="6">6</button>
-          <button data-operation="-">−</button>
+            <button data-number="1">1</button>
+            <button data-number="2">2</button>
+            <button data-number="3">3</button>
+            <button data-operation="+">+</button>
 
-          <button data-number="1">1</button>
-          <button data-number="2">2</button>
-          <button data-number="3">3</button>
-          <button data-operation="+">+</button>
+            <button data-number="0">0</button>
+            <button data-number=".">.</button>
+            <button data-action="calculate">=</button>
 
-          <button data-number="0">0</button>
-          <button data-number=".">.</button>
-          <button data-action="calculate">=</button>
+          </div>
+        </div>
+      </template>
+    </section>
 
+    <aside class="tools-section">
+      <div id="Clock" class="time-tool">
+        <h2>Reloj</h2>
+        <div class="display-clock">00:00:00</div>
+      </div>
+
+      <div id="Stopwatch" class="time-tool">
+        <h2>Cronómetro</h2>
+        <div class="stopwatch">
+          <div class="display-stopwatch">00:00:00</div>
+          <div class="controls">
+            <button class="startBtn-stopwatch">Iniciar</button>
+            <button class="stopBtn-stopwatch">Parar</button>
+            <button class="resetBtn-stopwatch">Reiniciar</button>
+          </div>
         </div>
       </div>
-    </template>
-  </main>
 
+      <div id="timer" class="time-tool">
+        <h2>Temporizador</h2>
+        <div class="display-timer">00:00:00</div>
+        <div class="controls">
+          <button class="startBtn-timer">Iniciar</button>
+          <button class="stopBtn-timer">Parar</button>
+          <button class="resetBtn-timer">Reiniciar</button>
+        </div>
+      </div>
+    </aside>
+  </main>
   <script type="module" src="/src/main.ts"></script>
 </body>
 
