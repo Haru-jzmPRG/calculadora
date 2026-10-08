@@ -12,6 +12,8 @@
   --deep-purple: #2e1a73;
   --dark-blue: #0d1026;
   --white: #ffffff;
+  --button-transition:
+    transform 0.1s ease, box-shadow 0.1s ease, filter 0.15s ease;
 }
 
 * {
@@ -21,259 +23,26 @@
 body {
   margin: 0;
   min-height: 100vh;
-
-  background-color: var(--dark-blue);
+  background: var(--dark-blue);
   color: var(--white);
-
   font-family: "CalculatorFont", sans-serif;
 }
 
-main {
-  width: 100%;
-  min-height: 100vh;
-  padding: 40px 20px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-h1 {
-  margin-top: 0;
-  margin-bottom: 20px;
-}
-
-/* =========================
-   BOTÓN NUEVA CALCULADORA
-   ========================= */
-
-#add-calculator {
-  padding: 12px 24px;
-  margin-bottom: 35px;
-
-  border: 4px solid var(--dark-purple);
-  border-radius: 14px;
-
-  background-color: var(--pink);
-  color: var(--white);
-
-  font-family: "CalculatorFont", sans-serif;
-  font-size: 1rem;
-
+button {
+  font-family: inherit;
   cursor: pointer;
-
-  box-shadow:
-    0 6px 0 var(--dark-purple),
-    0 8px 10px rgba(0, 0, 0, 0.2);
-
-  transition:
-    transform 0.1s ease,
-    box-shadow 0.1s ease,
-    filter 0.15s ease;
 }
-
-#add-calculator:hover {
+button:hover {
   filter: brightness(1.15);
 }
 
-#add-calculator:active {
-  transform: translateY(5px);
-
-  box-shadow:
-    0 1px 0 var(--dark-purple),
-    0 3px 5px rgba(0, 0, 0, 0.2);
-}
-
-/* =========================
-   CONTENEDOR
-   ========================= */
-
-#calculator-container {
-  width: 100%;
-
-  display: flex;
-  flex-wrap: wrap;
-
-  justify-content: center;
-  align-items: flex-start;
-
-  gap: 40px;
-}
-
-/* =========================
-   CALCULADORA
-   ========================= */
-
-.calculator {
-  width: 330px;
-  padding: 25px;
-
-  background-color: var(--pink);
-
-  border: 6px solid var(--dark-purple);
-  border-radius: 35px;
-
-  box-shadow:
-    0 12px 0 var(--dark-purple),
-    0 18px 25px rgba(0, 0, 0, 0.35);
-}
-
-/* =========================
-   PANTALLA
-   ========================= */
-
-.screen {
-  width: 100%;
-  height: 85px;
-
-  padding: 15px 18px;
-  margin-bottom: 25px;
-
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-
-  background-color: var(--white);
-  color: var(--dark-blue);
-
-  border: 6px solid var(--dark-purple);
-  border-radius: 15px;
-
-  font-family: "CalculatorFont", sans-serif;
-  font-size: 2.2rem;
-  font-weight: normal;
-
-  overflow: hidden;
-
-  box-shadow:
-    inset 0 5px 8px rgba(0, 0, 0, 0.25),
-    0 4px 0 var(--deep-purple);
-}
-
-/* =========================
-   BOTONES
-   ========================= */
-
-.buttons {
-  display: grid;
-
-  grid-template-columns: repeat(4, 1fr);
-
-  gap: 13px;
-}
-
-.calculator button {
-  height: 58px;
-
-  border: 4px solid var(--dark-purple);
-  border-radius: 14px;
-
-  background-color: var(--purple);
-  color: var(--white);
-
-  font-family: "CalculatorFont", sans-serif;
-  font-size: 1.25rem;
-  font-weight: normal;
-
-  cursor: pointer;
-
-  box-shadow:
-    0 6px 0 var(--dark-purple),
-    0 8px 10px rgba(0, 0, 0, 0.2);
-
-  transition:
-    transform 0.1s ease,
-    box-shadow 0.1s ease,
-    filter 0.15s ease;
-}
-
-/* Botones numéricos */
-
-.calculator button[data-number] {
-  background-color: var(--deep-purple);
-}
-
-/* Operaciones */
-
-.calculator button[data-operation] {
-  background-color: var(--purple);
-}
-
-/* C, DEL y % */
-
-.calculator button[data-action="clear"],
-.calculator button[data-action="delete"],
-.calculator button[data-action="percent"] {
-  background-color: var(--dark-purple);
-}
-
-/* Botón = */
-
-.calculator button[data-action="calculate"] {
-  background-color: var(--pink);
-
-  /* Ocupa las dos columnas restantes */
-  grid-column: span 2;
-}
-
-/* Hover */
-
-.calculator button:hover {
-  filter: brightness(1.15);
-}
-
-/* Efecto de pulsación */
-
-.calculator button:active {
-  transform: translateY(5px);
-
-  box-shadow:
-    0 1px 0 var(--dark-purple),
-    0 3px 5px rgba(0, 0, 0, 0.2);
-}
-
-/* =========================
-   RESPONSIVE
-   ========================= */
-
-@media (max-width: 400px) {
-  main {
-    padding: 25px 10px;
-  }
-
-  #calculator-container {
-    gap: 30px;
-  }
-
-  .calculator {
-    width: 90%;
-    padding: 20px;
-  }
-
-  .calculator button {
-    height: 52px;
-    font-size: 1.1rem;
-  }
-
-  .screen {
-    height: 75px;
-    font-size: 1.8rem;
-  }
-}
-
-/* =========================================================
-   DISTRIBUCIÓN DE LA PÁGINA
-   Izquierda: calculadoras originales; derecha: relojes
-   ========================================================= */
-
+/* Estructura general */
 main.workspace {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 300px;
   align-items: start;
-  gap: 0;
   width: 100%;
   min-height: 100vh;
-  padding: 0;
 }
 
 .calculators-section {
@@ -295,37 +64,124 @@ main.workspace {
   text-align: center;
 }
 
-.calculators-header #add-calculator {
-  margin-bottom: 0;
+#add-calculator {
+  padding: 12px 24px;
+  border: 4px solid var(--dark-purple);
+  border-radius: 14px;
+  background: var(--pink);
+  color: var(--white);
+  font-size: 1rem;
+  box-shadow:
+    0 6px 0 var(--dark-purple),
+    0 8px 10px rgb(0 0 0 / 20%);
+  transition: var(--button-transition);
 }
 
-.calculators-section #calculator-container {
-  width: 100%;
+#add-calculator:active {
+  transform: translateY(5px);
+  box-shadow:
+    0 1px 0 var(--dark-purple),
+    0 3px 5px rgb(0 0 0 / 20%);
+}
+
+#calculator-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
   gap: 40px;
+  width: 100%;
 }
 
-/* La calculadora conserva su tamaño, colores, pantalla y botones originales. */
-.calculators-section .calculator {
+/* Calculadoras */
+.calculator {
   flex: 0 0 330px;
+  width: 330px;
+  padding: 25px;
+  background: var(--pink);
+  border: 6px solid var(--dark-purple);
+  border-radius: 35px;
+  box-shadow:
+    0 12px 0 var(--dark-purple),
+    0 18px 25px rgb(0 0 0 / 35%);
 }
 
-/* Columna rosa completa a la derecha */
-.tools-section {
+.screen {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  height: 85px;
+  padding: 15px 18px;
+  margin-bottom: 25px;
+  overflow: hidden;
+  background: var(--white);
+  color: var(--dark-blue);
+  border: 6px solid var(--dark-purple);
+  border-radius: 15px;
+  font-size: 2.2rem;
+  box-shadow:
+    inset 0 5px 8px rgb(0 0 0 / 25%),
+    0 4px 0 var(--deep-purple);
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 13px;
+}
+
+.calculator button {
+  height: 58px;
   min-width: 0;
-  min-height: 100vh;
-  padding: 30px 18px;
+  border: 4px solid var(--dark-purple);
+  border-radius: 14px;
+  background: var(--purple);
+  color: var(--white);
+  font-size: 1.25rem;
+  box-shadow:
+    0 6px 0 var(--dark-purple),
+    0 8px 10px rgb(0 0 0 / 20%);
+  transition: var(--button-transition);
+}
+
+.calculator button[data-number] {
+  background: var(--deep-purple);
+}
+.calculator
+  button:is(
+    [data-action="clear"],
+    [data-action="delete"],
+    [data-action="percent"]
+  ) {
+  background: var(--dark-purple);
+}
+.calculator button[data-action="calculate"] {
+  grid-column: span 2;
+  background: var(--pink);
+}
+.calculator button:active {
+  transform: translateY(5px);
+  box-shadow:
+    0 1px 0 var(--dark-purple),
+    0 3px 5px rgb(0 0 0 / 20%);
+}
+
+/* Columna de reloj, cronómetro y temporizador */
+.tools-section {
   display: flex;
   flex-direction: column;
   gap: 28px;
+  min-width: 0;
+  min-height: 100vh;
+  padding: 30px 18px;
   background: var(--pink);
   border-left: 5px solid var(--dark-purple);
 }
 
-.time-tool {
+/* .time-tool se usa para reloj y cronómetro; #timer para el temporizador. */
+.time-tool,
+#timer .timer {
   min-width: 0;
   padding: 17px 13px 22px;
   background: var(--deep-purple);
@@ -333,94 +189,151 @@ main.workspace {
   border-radius: 25px;
   box-shadow:
     0 8px 0 var(--dark-purple),
-    0 12px 16px rgba(0, 0, 0, 0.22);
+    0 12px 16px rgb(0 0 0 / 22%);
 }
 
-.time-tool h2 {
+#timer .timer {
+  width: 100%;
+}
+
+.time-tool h2,
+#timer h2 {
   margin: 0 0 14px;
   color: var(--white);
   font-size: 1.15rem;
-  text-align: center;
   font-weight: normal;
+  text-align: center;
 }
 
 .display-clock,
 .display-stopwatch,
 .display-timer {
-  width: 100%;
-  min-height: 75px;
-  padding: 12px 6px;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  min-height: 75px;
+  padding: 12px 6px;
   background: var(--white);
   color: var(--dark-blue);
   border: 5px solid var(--dark-purple);
   border-radius: 14px;
   box-shadow:
-    inset 0 4px 7px rgba(0, 0, 0, 0.18),
+    inset 0 4px 7px rgb(0 0 0 / 18%),
     0 4px 0 var(--dark-purple);
   font-size: 1.65rem;
   white-space: nowrap;
 }
 
-.time-tool .controls {
+/* Rejillas de controles y teclado del temporizador */
+.time-tool .controls,
+#timer .buttons-timer,
+#timer .controls-timer {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 6px;
-  margin-top: 18px;
 }
 
-.time-tool .controls button {
+.time-tool .controls {
+  margin-top: 18px;
+}
+#timer .buttons-timer {
+  margin-top: 20px;
+  gap: 8px;
+}
+#timer .controls-timer {
+  margin-top: 12px;
+}
+#timer .display-timer {
+  margin-bottom: 0;
+}
+
+/* Estilo compartido de botones de herramientas */
+.time-tool .controls button,
+#timer button {
+  width: 100%;
   min-width: 0;
   padding: 11px 2px;
   border: 3px solid var(--dark-purple);
   border-radius: 10px;
   background: var(--purple);
   color: var(--white);
-  font-family: "CalculatorFont", sans-serif;
   font-size: 0.73rem;
-  cursor: pointer;
   box-shadow: 0 5px 0 var(--dark-purple);
-  transition:
-    transform 0.1s ease,
-    box-shadow 0.1s ease,
-    filter 0.15s ease;
+  transition: var(--button-transition);
 }
 
-.time-tool .controls button:first-child {
+.time-tool .controls button:first-child,
+#timer .startBtn-timer {
   background: var(--deep-purple);
 }
-.time-tool .controls button:last-child {
+
+.time-tool .controls button:last-child,
+#timer .resetBtn-timer {
   background: var(--dark-purple);
 }
-.time-tool .controls button:hover {
-  filter: brightness(1.15);
-}
-.time-tool .controls button:active {
+
+.time-tool .controls button:active,
+#timer button:active {
   transform: translateY(4px);
   box-shadow: 0 1px 0 var(--dark-purple);
 }
 
+#timer .buttons-timer button {
+  min-height: 43px;
+  font-size: 1rem;
+}
+#timer .deleteBtn-timer {
+  grid-column: span 2;
+  background: var(--dark-purple);
+}
+#timer .controls-timer button {
+  font-size: 0.65rem;
+  padding: 8px 1px;
+}
+
+/* Responsive */
 @media (max-width: 780px) {
   main.workspace {
     grid-template-columns: minmax(0, 1fr);
   }
-  .calculators-section {
+  .calculators-section,
+  .tools-section {
     min-height: auto;
   }
   .tools-section {
-    min-height: auto;
     border-left: 0;
     border-top: 5px solid var(--dark-purple);
   }
-  .time-tool {
+  .time-tool,
+  #timer .timer {
     width: 100%;
     max-width: 420px;
     align-self: center;
   }
-  .calculators-section .calculator {
+  .calculator {
     flex: 0 1 330px;
     max-width: 100%;
+  }
+}
+
+@media (max-width: 400px) {
+  .calculators-section {
+    padding: 25px 10px;
+  }
+  #calculator-container {
+    gap: 30px;
+  }
+  .calculator {
+    width: 90%;
+    padding: 20px;
+  }
+  .calculator button {
+    height: 52px;
+    font-size: 1.1rem;
+  }
+  .screen {
+    height: 75px;
+    font-size: 1.8rem;
   }
 }

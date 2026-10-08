@@ -1,6 +1,7 @@
 import "./style.css";
 import { Calculator } from "./Calculator";
 import { Stopwatch } from "./Stopwatch";
+import { Timer } from "./Timer";
 
 const calculatorContainer = document.querySelector(
   "#calculator-container",
@@ -51,4 +52,33 @@ const resetBtn = document.querySelector(
 ) as HTMLButtonElement;
 resetBtn.addEventListener("click", () => {
   stopwatch.resetStopwatch();
+});
+
+const timer = new Timer();
+
+const playTimer = document.querySelector(
+  ".startBtn-timer",
+) as HTMLButtonElement;
+playTimer.addEventListener("click", () => {
+  timer.playTimer();
+});
+
+const stopTimer = document.querySelector(".stopBtn-timer") as HTMLButtonElement;
+stopTimer.addEventListener("click", () => {
+  timer.stopTimer();
+});
+
+const resetTimer = document.querySelector(
+  ".resetBtn-timer",
+) as HTMLButtonElement;
+resetTimer.addEventListener("click", () => {
+  timer.resetTimer();
+});
+
+const deleteTimer = document.querySelector(
+  ".deleteBtn-timer",
+) as HTMLButtonElement;
+
+deleteTimer.addEventListener("click", () => {
+  timer.deleteTimer();
 });
