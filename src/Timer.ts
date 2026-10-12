@@ -2,7 +2,8 @@ import { interval, Subscription } from "rxjs";
 
 export class Timer {
   initialTime: number;
-  remainingTime: number;
+  private endTime: number = 0;
+  private remainingTime: number = 0;
 
   private subscription?: Subscription;
   private screen: HTMLElement;
@@ -27,10 +28,6 @@ export class Timer {
 
         const digit = button.getAttribute("data-number");
 
-        if (digit === null || !/^[0-9]$/.test(digit)) {
-          return;
-        }
-
         this.timerDigits = (this.timerDigits + digit).slice(-6);
 
         this.remainingTime = 0;
@@ -53,7 +50,7 @@ export class Timer {
       const minutes = parseInt(digits.slice(-4, -2), 10);
       const hours = parseInt(digits.slice(-6, -4), 10);
 
-      this.initialTime = hours * 3600 + minutes * 60 + seconds;
+      this.initialTime = (hours * 3600 + minutes * 60 + seconds) * 1000;
       this.remainingTime = this.initialTime;
     }
 
@@ -61,13 +58,14 @@ export class Timer {
       return;
     }
 
+    this.endTime = Date.now() + this.remainingTime;
+
     this.updateCountdownScreen();
 
-    this.subscription = interval(1000).subscribe(() => {
-      this.remainingTime -= 1;
+    this.subscription = interval(100).subscribe(() => {
+      this.remainingTime = Math.max(0, this.endTime - Date.now());
 
       if (this.remainingTime <= 0) {
-        this.remainingTime = 0;
         this.stopTimer();
       }
 
@@ -76,7 +74,13 @@ export class Timer {
   }
 
   stopTimer() {
-    this.subscription?.unsubscribe();
+    if (!this.subscription) {
+      return;
+    }
+
+    this.remainingTime = Math.max(0, this.endTime - Date.now());
+
+    this.subscription.unsubscribe();
     this.subscription = undefined;
   }
 
@@ -101,9 +105,10 @@ export class Timer {
   }
 
   updateCountdownScreen() {
-    const seconds = this.remainingTime % 60;
-    const minutes = Math.floor(this.remainingTime / 60) % 60;
-    const hours = Math.floor(this.remainingTime / 3600);
+    const totalSeconds = Math.ceil(this.remainingTime / 1000);
+    const seconds = totalSeconds % 60;
+    const minutes = Math.floor(totalSeconds / 60) % 60;
+    const hours = Math.floor(totalSeconds / 3600);
 
     const formattedSeconds = seconds.toString().padStart(2, "0");
     const formattedMinutes = minutes.toString().padStart(2, "0");

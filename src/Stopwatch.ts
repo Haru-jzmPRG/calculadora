@@ -1,13 +1,14 @@
 import { interval, Subscription } from "rxjs";
 
 export class Stopwatch {
-  elapsedTime = 0;
   private subscription?: Subscription;
   private screen: HTMLElement;
+  private startTime: number = 0;
+  private elapsedTime: number = 0;
 
   constructor() {
-    this.elapsedTime = 0;
     this.screen = document.querySelector(".display-stopwatch") as HTMLElement;
+    this.updateScreen();
   }
 
   playStopwatch() {
@@ -15,15 +16,24 @@ export class Stopwatch {
       return;
     }
 
-    this.subscription = interval(1000).subscribe(() => {
-      this.elapsedTime += 1;
+    this.startTime = Date.now();
+
+    this.subscription = interval(10).subscribe(() => {
       this.updateScreen();
     });
   }
 
   stopStopwatch() {
-    this.subscription?.unsubscribe();
+    if (!this.subscription) {
+      return;
+    }
+
+    this.elapsedTime += Date.now() - this.startTime;
+
+    this.subscription.unsubscribe();
     this.subscription = undefined;
+
+    this.updateScreen();
   }
 
   resetStopwatch() {
@@ -33,15 +43,20 @@ export class Stopwatch {
   }
 
   updateScreen() {
-    this.screen.textContent = this.elapsedTime.toString();
-    const seconds = this.elapsedTime % 60;
-    const minutes = Math.floor(this.elapsedTime / 60) % 60;
-    const hours = Math.floor(this.elapsedTime / 3600);
+    const totalTime = this.subscription
+      ? this.elapsedTime + (Date.now() - this.startTime)
+      : this.elapsedTime;
 
+    const miliseconds = totalTime % 1000;
+    const seconds = Math.floor(totalTime / 1000) % 60;
+    const minutes = Math.floor(totalTime / 60000) % 60;
+    const hours = Math.floor(totalTime / 3600000);
+
+    const formattedMiliseconds = miliseconds.toString().padStart(3, "0");
     const formattedSeconds = seconds.toString().padStart(2, "0");
     const formattedMinutes = minutes.toString().padStart(2, "0");
     const formattedHours = hours.toString().padStart(2, "0");
 
-    this.screen.textContent = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+    this.screen.textContent = `${formattedHours}:${formattedMinutes}:${formattedSeconds}:${formattedMiliseconds}`;
   }
 }

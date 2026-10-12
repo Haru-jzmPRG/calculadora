@@ -1,7 +1,8 @@
 import "./style.css";
-import { Calculator } from "./Calculator";
-import { Stopwatch } from "./Stopwatch";
-import { Timer } from "./Timer";
+import { Calculator } from "./calculator";
+import { Stopwatch } from "./stopwatch";
+import { Timer } from "./timer";
+import { Clock } from "./clock";
 
 const calculatorContainer = document.querySelector(
   "#calculator-container",
@@ -82,3 +83,5 @@ const deleteTimer = document.querySelector(
 deleteTimer.addEventListener("click", () => {
   timer.deleteTimer();
 });
+
+const clock = new Clock();
