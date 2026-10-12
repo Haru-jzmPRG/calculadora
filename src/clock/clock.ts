@@ -1,10 +1,13 @@
 import { interval } from "rxjs";
+import clockHTML from "./clock.html?raw";
 
 export class Clock {
   private screen: HTMLElement;
 
-  constructor() {
-    this.screen = document.querySelector(".display-clock") as HTMLElement;
+  constructor(container: HTMLElement) {
+    container.innerHTML = clockHTML;
+
+    this.screen = container.querySelector(".display-clock") as HTMLElement;
 
     this.updateScreen();
 

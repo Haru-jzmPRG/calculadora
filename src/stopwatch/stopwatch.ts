@@ -1,4 +1,5 @@
 import { interval, Subscription } from "rxjs";
+import stopwatchHTML from "./stopwatch.html?raw";
 
 export class Stopwatch {
   private subscription?: Subscription;
@@ -6,9 +7,33 @@ export class Stopwatch {
   private startTime: number = 0;
   private elapsedTime: number = 0;
 
-  constructor() {
-    this.screen = document.querySelector(".display-stopwatch") as HTMLElement;
+  constructor(container: HTMLElement) {
+    container.innerHTML = stopwatchHTML;
+
+    this.screen = container.querySelector(".display-stopwatch") as HTMLElement;
+
     this.updateScreen();
+
+    const startBtn = container.querySelector(
+      ".startBtn-stopwatch",
+    ) as HTMLButtonElement;
+    startBtn.addEventListener("click", () => {
+      this.playStopwatch();
+    });
+
+    const stopBtn = container.querySelector(
+      ".stopBtn-stopwatch",
+    ) as HTMLButtonElement;
+    stopBtn.addEventListener("click", () => {
+      this.stopStopwatch();
+    });
+
+    const resetBtn = container.querySelector(
+      ".resetBtn-stopwatch",
+    ) as HTMLButtonElement;
+    resetBtn.addEventListener("click", () => {
+      this.resetStopwatch();
+    });
   }
 
   playStopwatch() {

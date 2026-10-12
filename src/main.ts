@@ -1,8 +1,9 @@
 import "./style.css";
-import { Calculator } from "./calculator";
-import { Stopwatch } from "./stopwatch";
-import { Timer } from "./timer";
-import { Clock } from "./clock";
+import { Calculator } from "./calculator/calculator";
+import { Stopwatch } from "./stopwatch/stopwatch";
+import { Timer } from "./timer/timer";
+import { Clock } from "./clock/clock";
+import calculatorHTML from "./calculator/calculator.html?raw";
 
 const calculatorContainer = document.querySelector(
   "#calculator-container",
@@ -12,16 +13,14 @@ const addCalculatorButton = document.querySelector(
   "#add-calculator",
 ) as HTMLButtonElement;
 
-const calculatorTemplate = document.querySelector(
-  "#calculator-template",
-) as HTMLTemplateElement;
-
 function createCalculator() {
-  const clone = calculatorTemplate.content.cloneNode(true) as DocumentFragment;
+  const wrapper = document.createElement("div");
 
-  const calculatorElement = clone.querySelector(".calculator") as HTMLElement;
+  wrapper.innerHTML = calculatorHTML;
 
-  calculatorContainer.appendChild(clone);
+  const calculatorElement = wrapper.querySelector(".calculator") as HTMLElement;
+
+  calculatorContainer.appendChild(calculatorElement);
 
   new Calculator(calculatorElement);
 }
@@ -32,56 +31,20 @@ addCalculatorButton.addEventListener("click", () => {
   createCalculator();
 });
 
-const stopwatch = new Stopwatch();
+const stopwatchContainer = document.querySelector(
+  "#stopwatch-container",
+) as HTMLElement;
 
-const startBtn = document.querySelector(
-  ".startBtn-stopwatch",
-) as HTMLButtonElement;
-startBtn.addEventListener("click", () => {
-  stopwatch.playStopwatch();
-});
+new Stopwatch(stopwatchContainer);
 
-const stopBtn = document.querySelector(
-  ".stopBtn-stopwatch",
-) as HTMLButtonElement;
-stopBtn.addEventListener("click", () => {
-  stopwatch.stopStopwatch();
-});
+const timerContainer = document.querySelector(
+  "#timer-container",
+) as HTMLElement;
 
-const resetBtn = document.querySelector(
-  ".resetBtn-stopwatch",
-) as HTMLButtonElement;
-resetBtn.addEventListener("click", () => {
-  stopwatch.resetStopwatch();
-});
+new Timer(timerContainer);
 
-const timer = new Timer();
+const clockContainer = document.querySelector(
+  "#clock-container",
+) as HTMLElement;
 
-const playTimer = document.querySelector(
-  ".startBtn-timer",
-) as HTMLButtonElement;
-playTimer.addEventListener("click", () => {
-  timer.playTimer();
-});
-
-const stopTimer = document.querySelector(".stopBtn-timer") as HTMLButtonElement;
-stopTimer.addEventListener("click", () => {
-  timer.stopTimer();
-});
-
-const resetTimer = document.querySelector(
-  ".resetBtn-timer",
-) as HTMLButtonElement;
-resetTimer.addEventListener("click", () => {
-  timer.resetTimer();
-});
-
-const deleteTimer = document.querySelector(
-  ".deleteBtn-timer",
-) as HTMLButtonElement;
-
-deleteTimer.addEventListener("click", () => {
-  timer.deleteTimer();
-});
-
-const clock = new Clock();
+new Clock(clockContainer);

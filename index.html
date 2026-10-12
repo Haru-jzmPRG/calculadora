@@ -11,100 +11,19 @@
   <main class="workspace">
     <section class="calculators-section">
       <header class="calculators-header">
-        <h1>Calculadoras</h1>
-        <button id="add-calculator">Nueva calculadora</button>
+        <h1>Calculators</h1>
+        <button id="add-calculator">New Calculator</button>
       </header>
 
       <div id="calculator-container"></div>
-
-      <template id="calculator-template">
-        <div class="calculator">
-
-          <div class="screen">0</div>
-
-          <div class="buttons">
-
-            <button data-action="clear">C</button>
-            <button data-action="delete">DEL</button>
-            <button data-action="percent">%</button>
-            <button data-operation="/">÷</button>
-
-            <button data-number="7">7</button>
-            <button data-number="8">8</button>
-            <button data-number="9">9</button>
-            <button data-operation="*">×</button>
-
-            <button data-number="4">4</button>
-            <button data-number="5">5</button>
-            <button data-number="6">6</button>
-            <button data-operation="-">−</button>
-
-            <button data-number="1">1</button>
-            <button data-number="2">2</button>
-            <button data-number="3">3</button>
-            <button data-operation="+">+</button>
-
-            <button data-number="0">0</button>
-            <button data-number=".">.</button>
-            <button data-action="calculate">=</button>
-
-          </div>
-        </div>
-      </template>
     </section>
 
     <aside class="tools-section">
-      <div id="Clock" class="time-tool">
-        <h2>Reloj</h2>
-        <div class="display-clock">00:00:00:000</div>
-      </div>
+      <div id="clock-container"></div>
 
-      <div id="Stopwatch" class="time-tool">
-        <h2>Cronómetro</h2>
-        <div class="stopwatch">
-          <div class="display-stopwatch">00:00:00</div>
-          <div class="controls">
-            <button class="startBtn-stopwatch">Iniciar</button>
-            <button class="stopBtn-stopwatch">Parar</button>
-            <button class="resetBtn-stopwatch">Reiniciar</button>
+      <div id="stopwatch-container"></div>
 
-          </div>
-        </div>
-      </div>
-
-
-      <div id="timer">
-        <div class="timer">
-          <h2>TEMPORIZADOR</h2>
-
-          <div class="display-timer">00:00:00</div>
-
-          <div class="buttons-timer">
-            <button data-number="7">7</button>
-            <button data-number="8">8</button>
-            <button data-number="9">9</button>
-
-            <button data-number="4">4</button>
-            <button data-number="5">5</button>
-            <button data-number="6">6</button>
-
-            <button data-number="1">1</button>
-            <button data-number="2">2</button>
-            <button data-number="3">3</button>
-
-            <button data-number="0">0</button>
-            <button class="deleteBtn-timer">DEL</button>
-          </div>
-
-          <div class="controls-timer">
-            <button class="startBtn-timer">INICIAR</button>
-            <button class="stopBtn-timer">PARAR</button>
-            <button class="resetBtn-timer">REINICIAR</button>
-          </div>
-        </div>
-      </div>
-
-      </div>
+      <div id="timer-container"></div>
     </aside>
   </main>
   <script type="module" src="/src/main.ts"></script>

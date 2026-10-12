@@ -1,4 +1,5 @@
 import { interval, Subscription } from "rxjs";
+import timerHTML from "./timer.html?raw";
 
 export class Timer {
   initialTime: number;
@@ -11,14 +12,16 @@ export class Timer {
   buttons: NodeListOf<Element>;
   timerDigits: string;
 
-  constructor() {
+  constructor(container: HTMLElement) {
+    container.innerHTML = timerHTML;
+
+    this.screen = container.querySelector(".display-timer") as HTMLElement;
     this.initialTime = 0;
     this.remainingTime = 0;
     this.timerDigits = "";
+    this.updateScreen();
 
-    this.screen = document.querySelector(".display-timer") as HTMLElement;
-
-    this.buttons = document.querySelectorAll("#timer button[data-number]");
+    this.buttons = container.querySelectorAll("button[data-number]");
 
     this.buttons.forEach((button) => {
       button.addEventListener("click", () => {
@@ -35,6 +38,35 @@ export class Timer {
 
         this.updateScreen();
       });
+    });
+
+    const playTimer = container.querySelector(
+      ".startBtn-timer",
+    ) as HTMLButtonElement;
+    playTimer.addEventListener("click", () => {
+      this.playTimer();
+    });
+
+    const stopTimer = container.querySelector(
+      ".stopBtn-timer",
+    ) as HTMLButtonElement;
+    stopTimer.addEventListener("click", () => {
+      this.stopTimer();
+    });
+
+    const resetTimer = container.querySelector(
+      ".resetBtn-timer",
+    ) as HTMLButtonElement;
+    resetTimer.addEventListener("click", () => {
+      this.resetTimer();
+    });
+
+    const deleteTimer = container.querySelector(
+      ".deleteBtn-timer",
+    ) as HTMLButtonElement;
+
+    deleteTimer.addEventListener("click", () => {
+      this.deleteTimer();
     });
   }
 

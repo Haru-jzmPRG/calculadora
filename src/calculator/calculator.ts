@@ -1,3 +1,5 @@
+import calculatorHTML from "./calculator.html?raw";
+
 export class Calculator {
   currentInput: string;
   previousInput: string;
